@@ -8,7 +8,7 @@ exports.create = (req, res) => {
 
   if (!req.body.name) {
     res.status(400).send({
-      message: "Name of the category an't be empty",
+      message: "Name of the category can't be empty",
     });
     return;
   }
@@ -31,7 +31,7 @@ exports.create = (req, res) => {
       console.log(`Issue in inserting category name: [${category.name}]`);
       console.log(`Error message: ${err.message}`);
       res.status(500).send({
-        message: "Some internal error while storing the category!",
+        message: "Some internal error while creating the category!",
       });
     });
 };
@@ -68,6 +68,11 @@ exports.findOne = (req, res) => {
 
   Category.findByPk(categoryId)
     .then((category) => {
+      if (category == null) {
+        return res.status(404).send({
+          message: "category not found",
+        });
+      }
       res.status(200).send(category);
     })
     .catch((err) => {

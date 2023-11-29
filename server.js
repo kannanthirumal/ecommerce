@@ -29,6 +29,10 @@ function init() {
       name: "Kitchen items",
       description: "This category will contain all the Kitchen products",
     },
+    {
+      name: "Skin Care",
+      description: "This category will contain all the Skin Care products",
+    },
   ];
 
   Category.bulkCreate(categories)
@@ -41,6 +45,7 @@ function init() {
 }
 
 require("./routes/category.routes")(app);
+require("./routes/product.routes")(app);
 
 app.listen(serverConfig.PORT, () => {
   console.log("Application running on port: " + serverConfig.PORT);
