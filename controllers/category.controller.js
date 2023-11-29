@@ -109,3 +109,24 @@ exports.update = (req, res) => {
       });
     });
 };
+
+exports.delete = (req, res) => {
+  let categoryId = req.params.id;
+
+  Category.destroy({
+    where: {
+      id: categoryId,
+    },
+  })
+    .then((result) => {
+      res.status(200).send({
+        message: "Successfully deleted the category",
+      });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          "Some internal server error whie deleting the category based on id",
+      });
+    });
+};
