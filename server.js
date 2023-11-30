@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 
 const db = require("./models");
 const Category = db.category;
+const Role = db.role;
 
 //Creating one to many relationship (category to product)
 //The below sing le line of code establishes a one to many relationship between
@@ -47,10 +48,24 @@ function init() {
     .catch(() => {
       console.log("Error while initialising category table");
     });
+
+  /**
+   * Adding roles
+   */
+
+  var roles = db.ROLES;
+  Role.bulkCreate(roles)
+    .then(() => {
+      console.log("role table initialised");
+    })
+    .catch(() => {
+      console.log("Error while initialising role table");
+    });
 }
 
 require("./routes/category.routes")(app);
 require("./routes/product.routes")(app);
+require("./routes/auth.routes")(app);
 
 app.listen(serverConfig.PORT, () => {
   console.log("Application running on port: " + serverConfig.PORT);
