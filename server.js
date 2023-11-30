@@ -53,13 +53,17 @@ function init() {
    * Adding roles
    */
 
-  var roles = db.ROLES;
+  var roles = [
+    { id: 1, name: "user" },
+    { id: 2, name: "admin" },
+  ];
   Role.bulkCreate(roles)
     .then(() => {
       console.log("role table initialised");
     })
-    .catch(() => {
+    .catch((err) => {
       console.log("Error while initialising role table");
+      console.log(`${err.message}`);
     });
 }
 

@@ -13,7 +13,7 @@ const bcrypt = require("bcryptjs");
 exports.signup = (req, res) => {
   const user = {
     username: req.body.username,
-    email: request.body.email,
+    email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
     //here, above, either you can use the salt round as a number for the bcrypt to
     //generate a salt of desirable length (here, 8) or you can give a salt value yourself i guess

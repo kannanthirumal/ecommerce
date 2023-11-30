@@ -1,5 +1,5 @@
 const categoryController = require("../controllers/category.controller");
-const requestValidator = require("../middleswares/index");
+const { requestValidator } = require("../middleswares/index");
 
 module.exports = function (app) {
   app.post(

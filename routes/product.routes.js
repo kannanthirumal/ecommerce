@@ -1,5 +1,5 @@
 const productController = require("../controllers/product.controller");
-const requestValidator = require("../middleswares");
+const { requestValidator } = require("../middleswares");
 
 module.exports = function (app) {
   app.post(
