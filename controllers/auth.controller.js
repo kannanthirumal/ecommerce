@@ -21,7 +21,11 @@ exports.signup = (req, res) => {
   };
   User.create(user)
     .then((user) => {
-      if (req.body.roles) {
+      if (req.body.roles.length != 0) {
+        // if (req.body.roles.length != 0 && req.body.roles) {
+        //coz, "roles: []" is coming asa truthy, so normal users are getting
+        //into if blocks and getting all the roles both user and admin, so this
+        //req.body.roles.length != 0 prevents it
         Role.findAll({
           where: {
             name: {
