@@ -20,6 +20,7 @@ exports.create = (req, res) => {
     name: req.body.name,
     description: req.body.description,
     cost: req.body.cost,
+    categoryId: req.body.categoryId, //after establishing the relationship between category and products
   };
 
   Product.create(product)
