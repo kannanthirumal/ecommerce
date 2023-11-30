@@ -22,5 +22,32 @@ db.Sequelize = Sequelize;
 db.sequelize = seq;
 db.category = require("./category.model")(seq, Sequelize);
 db.product = require("./product.model")(seq, Sequelize);
+db.user = require("./user.model")(seq, Sequelize);
+db.role = require("./role.model")(seq, Sequelize);
+
+/**
+ * Establishing many to many relationship between user table and roles table
+ * 1. One user can have multiple roles
+ * 2. One Role can have multiple users
+ *
+ * 3. We are going to achieve this using a third table which has the mapping done
+ * 4. This third table is called "user_roles", and it will have a foreign key from both user and role table
+ */
+
+/**
+ * Estblishing this Many to many between user and role using sequelize
+ */
+
+db.role.belongsToMany(db.user, {
+  through: "user_roles",
+  foreignKey: "roleId",
+  otherKey: "userId",
+});
+
+db.user.belongsToMany(db.role, {
+  through: "user_roles",
+  foreignKey: "userId",
+  otherKey: "roleId",
+});
 
 module.exports = db;
