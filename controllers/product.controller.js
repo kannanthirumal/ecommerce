@@ -130,6 +130,7 @@ exports.update = (req, res) => {
     name: req.body.name,
     description: req.body.description,
     cost: req.body.cost,
+    categoryId: req.body.categoryId,
   };
 
   const productId = req.params.id;
@@ -174,6 +175,52 @@ exports.delete = (req, res) => {
       res.status(500).send({
         message:
           "Somme internal server error while deleting the category based on id",
+      });
+    });
+};
+
+/**
+ * Getting a list of all the products under a single
+ */
+
+exports.getProductsUnderCategory = (req, res) => {
+  let categoryId = parseInt(req.params.categoryId);
+  //parseInt -> just in case if the user sends an integer as a string, we convert that to number for safer side
+  //if categoryId - null - not passed, and this validation can be added in a separate validator
+  //if needed, but I didn't add as of now
+  db.category
+    .findByPk(categoryId)
+    .then((category) => {
+      if (category == null) {
+        res.status(404).send({
+          message: "Category doesn't exist",
+        });
+        return;
+      } else {
+        Product.findAll({
+          where: {
+            categoryId: categoryId,
+          },
+        })
+          .then((products) => {
+            if (products == null) {
+              res.status(404).send({
+                message: "No products found",
+              });
+              return;
+            }
+            res.status(200).send(products);
+          })
+          .catch((err) => {
+            res.status(500).send({
+              message: "Some internal server error while fetching the products",
+            });
+          });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Some internal server error while fetching the category",
       });
     });
 };
