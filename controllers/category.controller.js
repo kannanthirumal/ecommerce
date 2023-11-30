@@ -6,12 +6,13 @@ exports.create = (req, res) => {
    * validation of request body - will come to it later
    */
 
-  if (!req.body.name) {
-    res.status(400).send({
-      message: "Name of the category can't be empty",
-    });
-    return;
-  }
+  //commented out here coz, we added a separate middleware for this
+  // if (!req.body.name) {
+  //   res.status(400).send({
+  //     message: "Name of the category can't be empty",
+  //   });
+  //   return;
+  // }
 
   /**
    * proceed to create the category object to be inserted into db
@@ -83,6 +84,14 @@ exports.findOne = (req, res) => {
 };
 
 exports.update = (req, res) => {
+  //added these validations in the middleware, so commenting out here
+  // if (!req.body.name) {
+  //   res.status(400).send({
+  //     message: "Name of the category can't be empty",
+  //   });
+  //   return;
+  // }
+
   const category = {
     name: req.body.name,
     description: req.body.description,

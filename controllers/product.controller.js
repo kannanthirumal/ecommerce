@@ -2,19 +2,20 @@ const db = require("../models");
 const Product = db.product;
 
 exports.create = (req, res) => {
-  if (!req.body.name) {
-    res.status(400).send({
-      message: "Name of the product can't be empty",
-    });
-    return;
-  }
+  //added these validations in the middleware, so commenting out here
+  // if (!req.body.name) {
+  //   res.status(400).send({
+  //     message: "Name of the product can't be empty",
+  //   });
+  //   return;
+  // }
 
-  if (!req.body.cost) {
-    res.status(400).send({
-      message: "Cost of the product can't be empty",
-    });
-    return;
-  }
+  // if (!req.body.cost) {
+  //   res.status(400).send({
+  //     message: "Cost of the product can't be empty",
+  //   });
+  //   return;
+  // }
 
   let product = {
     name: req.body.name,
@@ -82,19 +83,20 @@ exports.findOne = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  if (!req.body.name) {
-    res.status(400).send({
-      message: "Name of the product can't be empty",
-    });
-    return;
-  }
+  //added these validations in the middleware, so commenting out here
+  // if (!req.body.name) {
+  //   res.status(400).send({
+  //     message: "Name of the product can't be empty",
+  //   });
+  //   return;
+  // }
 
-  if (!req.body.cost) {
-    res.status(400).send({
-      message: "Cost of the product can't be empty",
-    });
-    return;
-  }
+  // if (!req.body.cost) {
+  //   res.status(400).send({
+  //     message: "Cost of the product can't be empty",
+  //   });
+  //   return;
+  // }
 
   const product = {
     name: req.body.name,
