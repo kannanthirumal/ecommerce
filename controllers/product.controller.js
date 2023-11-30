@@ -1,5 +1,6 @@
 const db = require("../models");
 const Product = db.product;
+const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
   //added these validations in the middleware, so commenting out here
@@ -40,11 +41,38 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
   let productName = req.query.name;
+  let minCost = req.query.minCost;
+  let maxCost = req.query.maxCost;
   let promise;
   if (productName) {
     promise = Product.findAll({
       where: {
         name: productName,
+      },
+    });
+  } else if (minCost && maxCost) {
+    promise = Product.findAll({
+      where: {
+        cost: {
+          [Op.gte]: minCost,
+          [Op.lte]: maxCost,
+        },
+      },
+    });
+  } else if (minCost) {
+    promise = Product.findAll({
+      where: {
+        cost: {
+          [Op.gte]: minCost,
+        },
+      },
+    });
+  } else if (maxCost) {
+    promise = Product.findAll({
+      where: {
+        cost: {
+          [Op.lte]: maxCost,
+        },
       },
     });
   } else {
