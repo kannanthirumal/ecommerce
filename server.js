@@ -13,7 +13,7 @@ const Category = db.category;
 const Role = db.role;
 
 //Creating one to many relationship (category to product)
-//The below sing le line of code establishes a one to many relationship between
+//The below single line of code establishes a one to many relationship between
 //a category and a product, by creating a foreign key column (categoryId) in the product table
 Category.hasMany(db.product);
 
@@ -70,6 +70,7 @@ function init() {
 require("./routes/category.routes")(app);
 require("./routes/product.routes")(app);
 require("./routes/auth.routes")(app);
+require("./routes/cart.routes")(app);
 
 app.listen(serverConfig.PORT, () => {
   console.log("Application running on port: " + serverConfig.PORT);

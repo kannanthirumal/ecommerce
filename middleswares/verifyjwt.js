@@ -21,7 +21,23 @@ verifyToken = (req, res, next) => {
     }
 
     req.userId = decoded.id;
-    next();
+
+    User.findByPk(req.userId)
+      .then((user) => {
+        if (user == null) {
+          res.status(404).send({
+            message: "User not found",
+          });
+          return;
+        }
+        next();
+      })
+      .catch((err) => {
+        console.log(`err: ${err.message}`);
+        res.status(500).send({
+          message: "Some internal server error while fethcing the user",
+        });
+      });
   });
 };
 
