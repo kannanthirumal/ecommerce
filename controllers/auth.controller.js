@@ -21,7 +21,11 @@ exports.signup = (req, res) => {
   };
   User.create(user)
     .then((user) => {
-      if (req.body.roles.length != 0) {
+      if (
+        req.body.roles !== undefined ||
+        req.body.roles !== null ||
+        req.body.roles.length != 0
+      ) {
         // if (req.body.roles.length != 0 && req.body.roles) {
         //coz, "roles: []" is coming asa truthy, so normal users are getting
         //into if blocks and getting all the roles both user and admin, so this
@@ -59,6 +63,7 @@ exports.signup = (req, res) => {
             });
           });
       } else {
+        console.log("Dimple");
         user
           .setRoles([1]) //in the if block we are finding roles based on role name, if found it will return the role id,
           .then(() => {
