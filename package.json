@@ -4,7 +4,8 @@
   "description": "This is a code base for ecommerce backend app",
   "main": "server.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
