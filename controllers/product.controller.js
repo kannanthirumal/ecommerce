@@ -168,13 +168,13 @@ exports.delete = (req, res) => {
   })
     .then((result) => {
       res.status(200).send({
-        message: "product deleted successfully",
+        message: "Product deleted successfully",
       });
     })
     .catch((err) => {
       res.status(500).send({
         message:
-          "Somme internal server error while deleting the category based on id",
+          "Some internal server error while deleting the category based on id",
       });
     });
 };
