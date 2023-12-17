@@ -57,9 +57,9 @@ exports.findAll = (req, res) => {
       res.status(200).send(categories);
     })
     .catch((err) => {
-      console.log(`Somme internal error while fetching the categories`);
+      console.log("Error: ", err.message);
       res.status(500).send({
-        message: "Somme internal error while fetching the categories!",
+        message: "Some internal error while fetching the categories!",
       });
     });
 };

@@ -31,14 +31,18 @@ const checkDuplicateUsernameOrEmail = (req, res, next) => {
           next();
         })
         .catch((err) => {
+          console.log("Error ", err.message);
           res.status(500).send({
-            message: `${err.message}`,
+            // message: `${err.message}`,
+            message: "Some internal server error while proceesing the request",
           });
         });
     })
     .catch((err) => {
+      console.log("Error ", err.message);
       res.status(500).send({
-        message: `${err.message}`,
+        // message: `${err.message}`,
+        message: "Some internal server error while proceesing the request",
       });
     });
 };
