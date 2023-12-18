@@ -42,6 +42,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const db = require("./models");
+const initCategories = require("./scripts/initCategories");
+const initProducts = require("./scripts/initProducts");
 const Category = db.category;
 const Role = db.role;
 
@@ -56,31 +58,13 @@ db.sequelize
     console.log("tables dropped and created");
     init();
   })
-  .catch();
+  .catch((err) => {
+    console.log("Error: ", err.message);
+  });
 
 function init() {
-  var categories = [
-    {
-      name: "Electronis",
-      description: "This category will contain all the electronic products",
-    },
-    {
-      name: "Kitchen items",
-      description: "This category will contain all the Kitchen products",
-    },
-    {
-      name: "Skin Care",
-      description: "This category will contain all the Skin Care products",
-    },
-  ];
-
-  Category.bulkCreate(categories)
-    .then(() => {
-      console.log("Category table initialised");
-    })
-    .catch(() => {
-      console.log("Error while initialising category table");
-    });
+  initCategories();
+  initProducts();
 
   /**
    * Adding roles

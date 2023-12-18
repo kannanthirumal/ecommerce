@@ -46,8 +46,13 @@ exports.findAll = (req, res) => {
   let promise;
   if (productName) {
     promise = Product.findAll({
+      // where: {
+      //   name: productName,
+      // },
       where: {
-        name: productName,
+        name: {
+          [Op.like]: "%" + productName + "%",
+        },
       },
     });
   } else if (minCost && maxCost) {

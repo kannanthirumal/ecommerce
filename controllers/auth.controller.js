@@ -106,7 +106,7 @@ exports.signin = (req, res) => {
     .then((user) => {
       if (user == null) {
         res.status(404).send({
-          message: "User not found",
+          message: "User not found. Please sign up to create an account",
         });
         return;
       }
